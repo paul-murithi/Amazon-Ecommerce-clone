@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import data from "../../data/products";
 import "./CardGrid.css";
 
-const CardGrid = ({ data, addToCart }) => {
+const CardGrid = ({ data, addToCart, visibleAddedToCart }) => {
   return data.map((product) => (
     <div className="product-container" key={product.id}>
       <div className="product-image-container">
-        <img className="product-image" src={product.image} />
+        <img className="product-image" src={product.image} loading="lazy" />
       </div>
 
       <div className="product-name limit-text-to-2-lines">{product.name}</div>
@@ -37,15 +37,21 @@ const CardGrid = ({ data, addToCart }) => {
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
+      <div
+        className={`added-to-cart ${
+          visibleAddedToCart === product.id ? "active" : ""
+        }`}
+      >
         <img src="/icons/checkmark.png" />
         Added
       </div>
 
       <button
-        className="add-to-cart-button button-primary js-add-to-cart"
+        className="add-to-cart-button button-primary"
         data-product-id={product.id}
-        onClick={() => addToCart(product.id)}
+        onClick={() => {
+          addToCart(product.id);
+        }}
       >
         Add to Cart
       </button>

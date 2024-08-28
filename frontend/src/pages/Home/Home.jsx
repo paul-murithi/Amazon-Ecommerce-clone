@@ -6,6 +6,7 @@ import data from "../../data/products";
 
 const Home = () => {
   const [cart, setCart] = useState([]);
+  const [visibleAddedToCart, setVisibleAddedToCart] = useState(null);
 
   const addToCart = (productID) => {
     const matchingItem = cart.find((item) => item.productId === productID);
@@ -24,6 +25,10 @@ const Home = () => {
         { productId: productID, quantity: 1 },
       ]);
     }
+
+    setVisibleAddedToCart(productID);
+
+    setTimeout(() => setVisibleAddedToCart(null), 2500);
   };
 
   return (
@@ -32,8 +37,12 @@ const Home = () => {
         cartQuantity={cart.reduce((acc, item) => acc + item.quantity, 0)}
       />
       <div className="main">
-        <div className="products-grid js-products-grid">
-          <CardGrid data={data} addToCart={addToCart} />
+        <div className="products-grid">
+          <CardGrid
+            data={data}
+            addToCart={addToCart}
+            visibleAddedToCart={visibleAddedToCart}
+          />
         </div>
       </div>
     </>
