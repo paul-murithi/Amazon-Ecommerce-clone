@@ -1,5 +1,5 @@
 import Home from "./pages/Home/Home";
-import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Checkout/Checkout";
 import "./global.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -9,8 +9,8 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/cart",
-    element: <Cart />,
+    path: "/checkout",
+    element: <Checkout />,
   },
 ]);
 

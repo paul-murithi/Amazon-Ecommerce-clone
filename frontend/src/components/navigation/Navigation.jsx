@@ -34,7 +34,7 @@ const Navigation = ({ cartQuantity }) => {
           <span className="orders-text">& Orders</span>
         </a>
 
-        <a className="cart-link header-link" href="/cart">
+        <a className="cart-link header-link" href="/checkout">
           <img
             className="cart-icon"
             src="/icons/cart-icon.png"

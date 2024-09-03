@@ -1,8 +1,9 @@
 import React from "react";
+import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import HeaderStyles from "./Header.module.css";
 import styles from "./Checkout.module.css";
 
-const Cart = () => {
+const Checkout = () => {
   return (
     <>
       <div className={HeaderStyles.checkout_header}>
@@ -78,7 +79,6 @@ const Cart = () => {
                   <div className={styles.deliveryOption}>
                     <input
                       type="radio"
-                      checked
                       className={styles.deliveryOptionInput}
                       name="delivery-option"
                       id="delivery-option-1"
@@ -217,44 +217,11 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className={styles.paymentSummary}>
-            <div className={styles.paymentSummaryTitle}>Order Summary</div>
-
-            <div className={styles.paymentSummaryRow}>
-              <div>Items (3):</div>
-              <div className={styles.paymentSummaryMoney}>$42.75</div>
-            </div>
-
-            <div className={styles.paymentSummaryRow}>
-              <div>Shipping &amp; handling:</div>
-              <div className={styles.paymentSummaryMoney}>$4.99</div>
-            </div>
-
-            <div
-              className={`${styles.paymentSummaryRow} ${styles.subtotalRow}`}
-            >
-              <div>Total before tax:</div>
-              <div className={styles.paymentSummaryMoney}>$47.74</div>
-            </div>
-
-            <div className={styles.paymentSummaryRow}>
-              <div>Estimated tax (10%):</div>
-              <div className={styles.paymentSummaryMoney}>$4.77</div>
-            </div>
-
-            <div className={`${styles.paymentSummaryRow} ${styles.totalRow}`}>
-              <div>Order total:</div>
-              <div className={styles.paymentSummaryMoney}>$52.51</div>
-            </div>
-
-            <button className={`${styles.placeOrderButton} button-primary`}>
-              Place your order
-            </button>
-          </div>
+          <OrderSummary />
         </div>
       </div>
     </>
   );
 };
 
-export default Cart;
+export default Checkout;

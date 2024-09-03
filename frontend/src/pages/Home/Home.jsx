@@ -1,7 +1,8 @@
-import React from "react";
+import React, { createContext } from "react";
 import { useState } from "react";
 import Navigation from "../../components/navigation/Navigation";
-import CardGrid from "../../components/cardGrid/CardGrid";
+import CardGrid from "../../components/HomeItemsGrid/CardGrid";
+import Checkout from "../Checkout/Checkout";
 import data from "../../data/products";
 
 const Home = () => {
@@ -45,6 +46,7 @@ const Home = () => {
           />
         </div>
       </div>
+      ;
     </>
   );
 };

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import data from "../../data/products";
 import "./CardGrid.css";
 
-const CardGrid = ({ data, addToCart, visibleAddedToCart }) => {
+const CardGrid = ({ addToCart, data, visibleAddedToCart }) => {
   return data.map((product) => (
     <div className="product-container" key={product.id}>
       <div className="product-image-container">

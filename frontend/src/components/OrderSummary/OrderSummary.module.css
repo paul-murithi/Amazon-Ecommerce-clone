@@ -1,0 +1,58 @@
+.paymentSummary {
+  padding-bottom: 5px;
+}
+
+.paymentSummary {
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 4px;
+  padding: 18px;
+}
+
+.paymentSummaryTitle {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.paymentSummaryRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+
+.paymentSummaryMoney {
+  text-align: right;
+}
+
+.subtotalRow .paymentSummaryMoney {
+  border-top: 1px solid rgb(222, 222, 222);
+}
+
+.subtotalRow div {
+  padding-top: 9px;
+}
+
+.totalRow {
+  color: rgb(177, 39, 4);
+  font-weight: 700;
+  font-size: 18px;
+  border-top: 1px solid rgb(222, 222, 222);
+  padding-top: 18px;
+}
+
+.placeOrderButton {
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  margin-top: 11px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 1000px) {
+  .paymentSummary {
+    grid-row: 1;
+    margin-bottom: 12px;
+  }
+}
