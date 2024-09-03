@@ -8,31 +8,6 @@ import { useCart } from "../../Context/CartProvider";
 
 const Home = () => {
   const { cart, addToCart, visibleAddedToCart, cartQuantity } = useCart();
-  // const [cart, setCart] = useState([]);
-  // const [visibleAddedToCart, setVisibleAddedToCart] = useState(null);
-
-  // const addToCart = (productID) => {
-  //   const matchingItem = cart.find((item) => item.productId === productID);
-
-  //   if (matchingItem) {
-  //     setCart((prevCart) =>
-  //       prevCart.map((item) =>
-  //         item.productId === productID
-  //           ? { ...item, quantity: item.quantity + 1 }
-  //           : item
-  //       )
-  //     );
-  //   } else {
-  //     setCart((prevCart) => [
-  //       ...prevCart,
-  //       { productId: productID, quantity: 1 },
-  //     ]);
-  //   }
-
-  //   setVisibleAddedToCart(productID);
-
-  //   setTimeout(() => setVisibleAddedToCart(null), 2500);
-  // };
 
   return (
     <>
