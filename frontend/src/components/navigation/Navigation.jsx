@@ -1,18 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Navigation.css";
 
 const Navigation = ({ cartQuantity }) => {
   return (
     <nav className="amazon-header">
       <div className="amazon-header-left-section">
-        <a href="/" className="header-link">
+        <Link className="header-link" to="/">
           <img className="amazon-logo" src="/amazon-logo-white.png" />
           <img
             className="amazon-mobile-logo"
             src="/amazon-mobile-logo-white.png"
             alt="amazon-mobile-logo"
           />
-        </a>
+        </Link>
       </div>
 
       <div className="amazon-header-middle-section">
@@ -29,12 +30,12 @@ const Navigation = ({ cartQuantity }) => {
       </div>
 
       <div className="amazon-header-right-section">
-        <a className="orders-link header-link" href="orders.html">
+        <Link to="/orders" className="orders-link header-link">
           <span className="returns-text">Returns</span>
           <span className="orders-text">& Orders</span>
-        </a>
+        </Link>
 
-        <a className="cart-link header-link" href="/checkout">
+        <Link to="/checkout" className="cart-link header-link">
           <img
             className="cart-icon"
             src="/icons/cart-icon.png"
@@ -43,7 +44,7 @@ const Navigation = ({ cartQuantity }) => {
           />
           <div className="cart-quantity js-cart-quantity">{cartQuantity}</div>
           <div className="cart-text">Cart</div>
-        </a>
+        </Link>
       </div>
     </nav>
   );
