@@ -51,7 +51,7 @@ const CardGrid = ({ addToCart, data, visibleAddedToCart }) => {
         className="add-to-cart-button button-primary"
         data-product-id={product.id}
         onClick={() => {
-          addToCart(product.id);
+          addToCart(product);
         }}
       >
         Add to Cart

@@ -34,8 +34,6 @@ const Checkout = () => {
     }
   };
 
-  useEffect(() => console.log(cart));
-
   return (
     <>
       <div className={HeaderStyles.checkout_header}>
@@ -70,118 +68,130 @@ const Checkout = () => {
       <div className={styles.main}>
         <div className={styles.pageTitle}>Review your order</div>
 
-        <div className={styles.checkoutGrid}>
-          <div className={styles.orderSummary}>
-            {cart.map((item) => (
-              <div key={item.productId} className={styles.cartItemContainer}>
-                <div className={styles.deliveryDate}>
-                  Delivery date: {getDeliveryDate(item.productId)}
-                </div>
-
-                <div className={styles.cartItemDetailsGrid}>
-                  <img
-                    className={styles.productImage}
-                    src={item.image}
-                    alt={item.name}
-                  />
-
-                  <div className={styles.cartItemDetails}>
-                    <div className={styles.productName}>{item.name}</div>
-                    <div className={styles.productPrice}>
-                      ${(item.priceCents / 100).toFixed(2)}
-                    </div>
-                    <div className={styles.productQuantity}>
-                      <span>
-                        Quantity:{" "}
-                        <span className={styles.quantityLabel}>
-                          {item.quantity}
-                        </span>
-                      </span>
-                      <span
-                        className={`${styles.updateQuantityLink} link-primary`}
-                      >
-                        Update
-                      </span>
-                      <span
-                        className={`${styles.deleteQuantityLink} link-primary`}
-                      >
-                        Delete
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className={styles.deliveryOptions}>
-                    <div className={styles.deliveryOptionsTitle}>
-                      Choose a delivery option:
-                    </div>
-                    <div className={styles.deliveryOption}>
-                      <input
-                        type="radio"
-                        className={styles.deliveryOptionInput}
-                        name={`delivery-option-${item.productId}`}
-                        id={`delivery-option-${item.productId}-1`}
-                        onChange={() =>
-                          handleDeliveryOptionChange(item.productId, "standard")
-                        }
-                      />
-                      <label htmlFor={`delivery-option-${item.productId}-1`}>
-                        <div className={styles.deliveryOptionDate}>
-                          {calculateDeliveryDate(7)}
-                        </div>
-                        <div className={styles.deliveryOptionPrice}>
-                          FREE Shipping
-                        </div>
-                      </label>
-                    </div>
-                    <div className={styles.deliveryOption}>
-                      <input
-                        type="radio"
-                        className={styles.deliveryOptionInput}
-                        name={`delivery-option-${item.productId}`}
-                        id={`delivery-option-${item.productId}-2`}
-                        onChange={() =>
-                          handleDeliveryOptionChange(item.productId, "express")
-                        }
-                      />
-                      <label htmlFor={`delivery-option-${item.productId}-2`}>
-                        <div className={styles.deliveryOptionDate}>
-                          {calculateDeliveryDate(3)}
-                        </div>
-                        <div className={styles.deliveryOptionPrice}>
-                          $4.99 - Shipping
-                        </div>
-                      </label>
-                    </div>
-                    <div className={styles.deliveryOption}>
-                      <input
-                        type="radio"
-                        className={styles.deliveryOptionInput}
-                        name={`delivery-option-${item.productId}`}
-                        id={`delivery-option-${item.productId}-3`}
-                        onChange={() =>
-                          handleDeliveryOptionChange(
-                            item.productId,
-                            "overnight"
-                          )
-                        }
-                      />
-                      <label htmlFor={`delivery-option-${item.productId}-3`}>
-                        <div className={styles.deliveryOptionDate}>
-                          {calculateDeliveryDate(1)}
-                        </div>
-                        <div className={styles.deliveryOptionPrice}>
-                          $9.99 - Shipping
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            <OrderSummary />
+        {cart.length === 0 ? (
+          <div className={styles.emptyCartMessage}>
+            Your cart is empty. <Link to="/">Continue shopping</Link>
           </div>
-        </div>
+        ) : (
+          <div className={styles.checkoutGrid}>
+            <div className={styles.orderSummary}>
+              {cart.map((item) => (
+                <div key={item.productId} className={styles.cartItemContainer}>
+                  <div className={styles.deliveryDate}>
+                    Delivery date: {getDeliveryDate(item.productId)}
+                  </div>
+
+                  <div className={styles.cartItemDetailsGrid}>
+                    <img
+                      className={styles.productImage}
+                      src={item.image}
+                      alt={item.name}
+                    />
+
+                    <div className={styles.cartItemDetails}>
+                      <div className={styles.productName}>{item.name}</div>
+                      <div className={styles.productPrice}>
+                        ${(item.priceCents / 100).toFixed(2)}
+                      </div>
+                      <div className={styles.productQuantity}>
+                        <span>
+                          Quantity:{" "}
+                          <span className={styles.quantityLabel}>
+                            {item.quantity}
+                          </span>
+                        </span>
+                        <span
+                          className={`${styles.updateQuantityLink} link-primary`}
+                        >
+                          Update
+                        </span>
+                        <span
+                          className={`${styles.deleteQuantityLink} link-primary`}
+                        >
+                          Delete
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className={styles.deliveryOptions}>
+                      <div className={styles.deliveryOptionsTitle}>
+                        Choose a delivery option:
+                      </div>
+                      <div className={styles.deliveryOption}>
+                        <input
+                          type="radio"
+                          className={styles.deliveryOptionInput}
+                          name={`delivery-option-${item.productId}`}
+                          id={`delivery-option-${item.productId}-1`}
+                          onChange={() =>
+                            handleDeliveryOptionChange(
+                              item.productId,
+                              "standard"
+                            )
+                          }
+                        />
+                        <label htmlFor={`delivery-option-${item.productId}-1`}>
+                          <div className={styles.deliveryOptionDate}>
+                            {calculateDeliveryDate(7)}
+                          </div>
+                          <div className={styles.deliveryOptionPrice}>
+                            FREE Shipping
+                          </div>
+                        </label>
+                      </div>
+                      <div className={styles.deliveryOption}>
+                        <input
+                          type="radio"
+                          className={styles.deliveryOptionInput}
+                          name={`delivery-option-${item.productId}`}
+                          id={`delivery-option-${item.productId}-2`}
+                          onChange={() =>
+                            handleDeliveryOptionChange(
+                              item.productId,
+                              "express"
+                            )
+                          }
+                        />
+                        <label htmlFor={`delivery-option-${item.productId}-2`}>
+                          <div className={styles.deliveryOptionDate}>
+                            {calculateDeliveryDate(3)}
+                          </div>
+                          <div className={styles.deliveryOptionPrice}>
+                            $4.99 - Shipping
+                          </div>
+                        </label>
+                      </div>
+                      <div className={styles.deliveryOption}>
+                        <input
+                          type="radio"
+                          className={styles.deliveryOptionInput}
+                          name={`delivery-option-${item.productId}`}
+                          id={`delivery-option-${item.productId}-3`}
+                          onChange={() =>
+                            handleDeliveryOptionChange(
+                              item.productId,
+                              "overnight"
+                            )
+                          }
+                        />
+                        <label htmlFor={`delivery-option-${item.productId}-3`}>
+                          <div className={styles.deliveryOptionDate}>
+                            {calculateDeliveryDate(1)}
+                          </div>
+                          <div className={styles.deliveryOptionPrice}>
+                            $9.99 - Shipping
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <OrderSummary />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
