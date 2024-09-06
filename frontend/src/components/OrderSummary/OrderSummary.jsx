@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styles from "./OrderSummary.module.css";
 import { useCart } from "../../Context/CartProvider";
 
-const OrderSummary = () => {
+const OrderSummary = ({ handlePlaceOrder }) => {
   const { cart } = useCart();
 
   const calculateItemsTotal = () => {
@@ -17,6 +17,15 @@ const OrderSummary = () => {
   const taxRate = 0.1; // 10%
   const tax = (itemsTotal + shipping) * taxRate;
   const orderTotal = ((itemsTotal + shipping + tax) / 100).toFixed(2);
+
+  const onPlaceOrderClick = () => {
+    handlePlaceOrder({
+      itemsTotal,
+      shipping,
+      tax,
+      orderTotal,
+    });
+  };
 
   return (
     <div className={styles.paymentSummary}>
@@ -55,9 +64,16 @@ const OrderSummary = () => {
         <div className={styles.paymentSummaryMoney}>${orderTotal}</div>
       </div>
 
-      <button className={`${styles.placeOrderButton} button-primary`}>
+      <button
+        className={`${styles.placeOrderButton} button-primary`}
+        onClick={onPlaceOrderClick}
+      >
         Place your order
       </button>
+      {/**
+       * To do: When the user clicks the place order button, save that specific order.
+       * organize items in the cart to one order. Save the date, total amount of the order
+       */}
     </div>
   );
 };

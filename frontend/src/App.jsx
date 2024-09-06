@@ -4,6 +4,7 @@ import Orders from "./pages/Orders/Orders";
 import "./global.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CartProvider } from "./Context/CartProvider";
+import { OrderProvider } from "./Context/OrderContext";
 
 const router = createBrowserRouter([
   {

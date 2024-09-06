@@ -1,0 +1,33 @@
+@media (max-width: 1000px) {
+  .deliveryOptions {
+    grid-column: 1 / span 2;
+  }
+}
+
+.deliveryOptionsTitle {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.deliveryOption {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.deliveryOptionInput {
+  margin-left: 0px;
+  cursor: pointer;
+}
+
+.deliveryOptionDate {
+  color: rgb(0, 118, 0);
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.deliveryOptionPrice {
+  color: rgb(120, 120, 120);
+  font-size: 15px;
+}
