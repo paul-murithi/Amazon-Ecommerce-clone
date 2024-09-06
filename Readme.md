@@ -17,7 +17,7 @@ While I have used this project to demonstrate my ability to develop various feat
 ## Project Details
 
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:**
-- **Database:**
+- **Backend:** Java spring
+- **Database:** MySQL
 
 **Disclaimer:** I am not affiliated with any existing e-commerce platform, and this project is not endorsed or approved by any such platform.
