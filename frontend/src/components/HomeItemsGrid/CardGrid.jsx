@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import data from "../../data/products";
 import "./CardGrid.css";
 
 const CardGrid = ({ addToCart, data, visibleAddedToCart }) => {
@@ -15,10 +14,10 @@ const CardGrid = ({ addToCart, data, visibleAddedToCart }) => {
       <div className="product-rating-container">
         <img
           className="product-rating-stars"
-          src={`/ratings/rating-${product.rating.stars * 10}.png`}
+          src={`/ratings/rating-${product.ratingStars * 10}.png`}
         />
         <div className="product-rating-count link-primary">
-          {product.rating.count}
+          {product.ratingCount}
         </div>
       </div>
 
