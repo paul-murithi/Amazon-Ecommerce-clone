@@ -7,10 +7,14 @@ export const OrderProvider = ({ children }) => {
   const [order, setOrder] = useState(null);
 
   const placeOrder = async (orderDetails) => {
+    console.log("Order Details:", orderDetails);
+
     try {
-      const response = await axios.post("/api/orders", orderDetails);
+      const response = await axios.post(
+        "http://localhost:8080/api/orders",
+        orderDetails
+      );
       setOrder(response.data);
-      return response.data;
     } catch (error) {
       console.error("Error placing the order:", error);
       throw error;
