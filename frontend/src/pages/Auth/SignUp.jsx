@@ -5,6 +5,7 @@ import { validateSignUpForm } from "../../utilities/formValidation";
 const SignUp = () => {
   const [formValues, setFormValues] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -12,21 +13,50 @@ const SignUp = () => {
 
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [backendMessage, setBackendMessage] = useState(""); // To store success or error messages from backend
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateSignUpForm(formValues);
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      setIsSubmitted(true);
-      // To do: Form submission
-      console.log("Form submitted successfully:", formValues);
+      setLoading(true);
+      try {
+        const response = await fetch("http://localhost:8080/api/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formValues.name,
+            username: formValues.username,
+            email: formValues.email,
+            password: formValues.password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setIsSubmitted(true);
+          setBackendMessage("Account created successfully!");
+        } else {
+          setIsSubmitted(false);
+          setBackendMessage(data.message || "Error creating account");
+        }
+      } catch (error) {
+        setIsSubmitted(false);
+        setBackendMessage("Something went wrong. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -57,6 +87,26 @@ const SignUp = () => {
             {formErrors.name && (
               <span id="name-error" className={"errorMessage"}>
                 {formErrors.name}
+              </span>
+            )}
+          </div>
+
+          <div className={"formGroup"}>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formValues.username}
+              onChange={handleInputChange}
+              aria-invalid={!!formErrors.username}
+              aria-describedby="username-error"
+              placeholder="Enter your username"
+              required
+            />
+            {formErrors.username && (
+              <span id="username-error" className={"errorMessage"}>
+                {formErrors.username}
               </span>
             )}
           </div>
@@ -121,14 +171,20 @@ const SignUp = () => {
             )}
           </div>
 
-          <button type="submit" className={`submitButton button-primary`}>
-            Continue
+          <button
+            type="submit"
+            className={`submitButton button-primary`}
+            disabled={loading}
+          >
+            {loading ? "Creating account..." : "Continue"}
           </button>
 
           {isSubmitted && (
-            <div className={"successMessage"}>
-              Account created successfully!
-            </div>
+            <div className={"successMessage"}>{backendMessage}</div>
+          )}
+
+          {!isSubmitted && backendMessage && (
+            <div className={"errorMessage"}>{backendMessage}</div>
           )}
         </form>
 

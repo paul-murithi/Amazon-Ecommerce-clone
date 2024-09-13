@@ -1,31 +1,43 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./combinedAuth.css";
 import { validateSignInForm } from "../../utilities/formValidation";
+import { useAuth } from "../../Context/AuthContext";
 
 const SignIn = () => {
+  // const { login, isAuthenticated } = useAuth();
+
+  const { login } = useAuth();
   const [formValues, setFormValues] = useState({
-    email: "",
+    usernameOrEmail: "",
     password: "",
   });
-
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateSignInForm(formValues);
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      setIsSubmitted(true);
-      // To do: Form submission
-      console.log("Form submitted successfully:", formValues);
+      setLoading(true);
+      setError("");
+      try {
+        await login(formValues.usernameOrEmail, formValues.password);
+        navigate("/");
+      } catch (err) {
+        setError(err.message);
+      }
+      setLoading(false);
     }
   };
 
@@ -41,52 +53,50 @@ const SignIn = () => {
 
         <form onSubmit={handleSubmit} noValidate aria-live="polite">
           <div className={"formGroup"}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="usernameOrEmail">Username or Email</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={formValues.email}
+              type="text"
+              name="usernameOrEmail"
+              id="usernameOrEmail"
+              value={formValues.usernameOrEmail}
               onChange={handleInputChange}
-              aria-invalid={!!formErrors.email}
-              aria-describedby="email-error"
-              placeholder="Enter your email"
+              aria-invalid={!!formErrors.usernameOrEmail}
+              aria-describedby="usernameOrEmail-error"
               required
             />
-            {formErrors.email && (
-              <span id="email-error" className={"errorMessage"}>
-                {formErrors.email}
+            {formErrors.usernameOrEmail && (
+              <span id="usernameOrEmail-error">
+                {formErrors.usernameOrEmail}
               </span>
             )}
           </div>
 
-          <div className={"formGroup"}>
+          <div className="formGroup">
             <label htmlFor="password">Password</label>
             <input
               type="password"
-              id="password"
               name="password"
+              id="password"
               value={formValues.password}
               onChange={handleInputChange}
               aria-invalid={!!formErrors.password}
               aria-describedby="password-error"
-              placeholder="Enter your password"
               required
             />
             {formErrors.password && (
-              <span id="password-error" className={"errorMessage"}>
-                {formErrors.password}
-              </span>
+              <span id="password-error">{formErrors.password}</span>
             )}
           </div>
 
-          <button type="submit" className={"submitButton button-primary"}>
-            Continue
-          </button>
+          {error && <p className="error">{error}</p>}
 
-          {isSubmitted && (
-            <div className={"successMessage"}>Signed in successfully!</div>
-          )}
+          <button
+            type="submit"
+            className={"submitButton button-primary"}
+            disabled={loading}
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
         </form>
 
         <p className="linkText">
