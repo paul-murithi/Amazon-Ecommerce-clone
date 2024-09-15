@@ -31,13 +31,13 @@ export const validateSignUpForm = (values) => {
 };
 
 export const validateSignInForm = (values) => {
+  console.log(values);
+
   const errors = {};
 
   // Email validation
-  if (!values.email) {
-    errors.email = "Email is required";
-  } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = "Email address is invalid";
+  if (!values.usernameOrEmail) {
+    errors.usernameOrEmail = "Email is required";
   }
 
   // Password validation

@@ -11,11 +11,12 @@ export const AuthProvider = ({ children }) => {
 
   // Updated login function to receive user data from the backend
   const login = async (usernameOrEmail, password) => {
+    console.log("Assyn function hit");
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/signin", {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,9 +32,16 @@ export const AuthProvider = ({ children }) => {
         throw new Error(errorData || "Login failed");
       }
 
-      const userData = await response.json();
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
+      // since response contains a JWT token
+      const { accessToken } = await response.json();
+
+      // Save the JWT token in localStorage
+      localStorage.setItem("jwtToken", accessToken);
+
+      // const userData = await response.json();
+      // localStorage.setItem("user", JSON.stringify(userData));
+
+      // setUser(userData);
     } catch (err) {
       setError(err.message);
       throw err;
@@ -49,13 +57,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Check if user is  authenticated on page load
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  //   setLoading(false);
+  // }, []);
 
   const isAuthenticated = !!user;
 

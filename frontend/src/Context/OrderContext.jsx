@@ -10,10 +10,18 @@ export const OrderProvider = ({ children }) => {
     console.log("Order Details:", orderDetails);
 
     try {
+      const token = localStorage.getItem("jwtToken");
+
       const response = await axios.post(
         "http://localhost:8080/api/orders",
-        orderDetails
+        orderDetails,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
       setOrder(response.data);
     } catch (error) {
       console.error("Error placing the order:", error);

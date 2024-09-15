@@ -42,18 +42,28 @@ const SignUp = () => {
           }),
         });
 
-        const data = await response.json();
-
-        if (response.ok) {
-          setIsSubmitted(true);
-          setBackendMessage("Account created successfully!");
+        // Check if the response is JSON
+        const contentType = response.headers.get("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          if (response.ok) {
+            setIsSubmitted(true);
+            setBackendMessage("Account created successfully!");
+          } else {
+            setIsSubmitted(false);
+            setBackendMessage(data.message || "Error creating account");
+          }
         } else {
+          // Handle non-JSON responses
+          const text = await response.text();
           setIsSubmitted(false);
-          setBackendMessage(data.message || "Error creating account");
+          setBackendMessage(text || "Unexpected error occurred.");
         }
       } catch (error) {
         setIsSubmitted(false);
         setBackendMessage("Something went wrong. Please try again.");
+        console.log(error);
+        console.log(formValues);
       } finally {
         setLoading(false);
       }

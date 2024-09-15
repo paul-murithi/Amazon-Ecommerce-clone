@@ -57,12 +57,12 @@ const Checkout = () => {
       setShowModal(true);
       return;
     }
-    if (!isAuthenticated) {
-      setErrorMessage("Please log in first to complete your order");
-      setShowModal(true);
-      setIsNotLoggedIn(true);
-      return;
-    }
+    // if (!isAuthenticated) {
+    //   setErrorMessage("Please log in first to complete your order");
+    //   setShowModal(true);
+    //   setIsNotLoggedIn(true);
+    //   return;
+    // }
 
     const { itemsTotal, shipping, tax, orderTotal } = costSummary;
 

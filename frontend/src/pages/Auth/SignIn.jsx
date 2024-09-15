@@ -25,6 +25,8 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("After e.preventDefault");
+
     const errors = validateSignInForm(formValues);
     setFormErrors(errors);
 
@@ -32,6 +34,8 @@ const SignIn = () => {
       setLoading(true);
       setError("");
       try {
+        console.log(formValues);
+
         await login(formValues.usernameOrEmail, formValues.password);
         navigate("/");
       } catch (err) {
@@ -93,6 +97,7 @@ const SignIn = () => {
           <button
             type="submit"
             className={"submitButton button-primary"}
+            onSubmit={handleSubmit}
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign In"}

@@ -75,16 +75,16 @@
     VALUES ('19c6a64a-5463-4d45-9af8-e41140a4100c', '/products/duvet-cover-set-blue-twin.jpg', 'Duvet Cover Set with Zipper Closure', 4, 456, 2399, '["bedroom", "bed sheets", "sheets", "covers", "home"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
-    VALUES ('d2785924-743d-49b3-8f03-ec258e640503', '/products/women-chunky-beanie-gray.webp', 'Women's Chunky Cable Beanie - Gray', 5, 83, 1250, '["hats", "winter hats", "beanies", "tuques", "apparel", "womens"]', 'None', 'None');
+    VALUES ('d2785924-743d-49b3-8f03-ec258e640503', '/products/women-chunky-beanie-gray.webp', 'Women''s Chunky Cable Beanie - Gray', 5, 83, 1250, '["hats", "winter hats", "beanies", "tuques", "apparel", "womens"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
-    VALUES ('ee1f7c56-f977-40a4-9642-12ba5072e2b0', '/products/men-chino-pants-beige.jpg', 'Men's Classic-fit Pleated Chino Pants', 4.5, 9017, 2290, '["pants", "apparel", "mens"]', 'None', 'None');
+    VALUES ('ee1f7c56-f977-40a4-9642-12ba5072e2b0', '/products/men-chino-pants-beige.jpg', 'Men''s Classic-fit Pleated Chino Pants', 4.5, 9017, 2290, '["pants", "apparel", "mens"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
-    VALUES ('1c079479-8586-494f-ab53-219325432536', '/products/men-athletic-shoes-green.jpg', 'Men's Athletic Sneaker', 4, 229, 3890, '["shoes", "running shoes", "footwear", "mens"]', 'None', 'None');
+    VALUES ('1c079479-8586-494f-ab53-219325432536', '/products/men-athletic-shoes-green.jpg', 'Men''s Athletic Sneaker', 4, 229, 3890, '["shoes", "running shoes", "footwear", "mens"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
-    VALUES ('4df68c27-fd59-4a6a-bbd1-e754ddb6d53c', '/products/men-navigator-sunglasses-brown.jpg', 'Men's Navigator Sunglasses Pilot', 3.5, 42, 1690, '["sunglasses", "glasses", "accessories", "shades"]', 'None', 'None');
+    VALUES ('4df68c27-fd59-4a6a-bbd1-e754ddb6d53c', '/products/men-navigator-sunglasses-brown.jpg', 'Men''s Navigator Sunglasses Pilot', 3.5, 42, 1690, '["sunglasses", "glasses", "accessories", "shades"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
     VALUES ('4e37dd03-3b23-4bc6-9ff8-44e112a92c64', '/products/non-stick-cooking-set-15-pieces.webp', 'Non-Stick Cookware Set, Pots, Pans and Utensils - 15 Pieces', 4.5, 511, 6797, '["cooking set", "kitchen"]', 'None', 'None');
@@ -93,7 +93,7 @@
     VALUES ('a434b69f-1bc1-482d-9ce7-cd7f4a66ce8d', '/products/vanity-mirror-silver.jpg', 'Vanity Mirror with Heavy Base - Chrome', 4.5, 130, 1649, '["bathroom", "washroom", "mirrors", "home"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
-    VALUES ('a45cfa0a-66d6-4dc7-9475-e2b01595f7d7', '/products/women-french-terry-fleece-jogger-camo.jpg', 'Women's Fleece Jogger Sweatpant', 4.5, 248, 2400, '["pants", "sweatpants", "jogging", "apparel", "womens"]', 'None', 'None');
+    VALUES ('a45cfa0a-66d6-4dc7-9475-e2b01595f7d7', '/products/women-french-terry-fleece-jogger-camo.jpg', 'Women''s Fleece Jogger Sweatpant', 4.5, 248, 2400, '["pants", "sweatpants", "jogging", "apparel", "womens"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
     VALUES ('d339adf3-e004-4c20-a120-40e8874c66cb', '/products/double-elongated-twist-french-wire-earrings.webp', 'Double Oval Twist French Wire Earrings - Gold', 4.5, 117, 2400, '["accessories", "womens"]', 'None', 'None');
@@ -106,8 +106,6 @@
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
     VALUES ('02e3a47e-dd68-467e-9f71-8bf6f723fdae', '/products/blackout-curtains-black.jpg', 'Blackout Curtains Set 42 x 84-Inch - Black, 2 Panels', 4.5, 363, 3099, '["bedroom", "home"]', 'None', 'None');
-
-
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
     VALUES ('8a53b080-6d40-4a65-ab26-b24ecf700bce', '/products/cotton-bath-towels-teal.webp', '100% Cotton Bath Towels - 2 Pack, Light Teal', 4.5, 93, 2110, '["bathroom", "home", "towels"]', 'None', 'None');
@@ -125,5 +123,5 @@
     VALUES ('aaa65ef3-8d6f-4eb3-bc9b-a6ea49047d8f', '/products/kitchen-paper-towels-30-pack.jpg', '2-Ply Kitchen Paper Towels - 30 Pack', 4.5, 1045, 5799, '["kitchen", "kitchen towels", "tissues"]', 'None', 'None');
     
     INSERT INTO products (product_id, image, name, rating_stars, rating_count, price_cents, keywords, type, size_chart_link)
-    VALUES ('bc2847e9-5323-403f-b7cf-57fde044a955', '/products/men-cozy-fleece-zip-up-hoodie-red.jpg', 'Men's Full-Zip Hooded Fleece Sweatshirt', 4.5, 3157, 2400, '["sweaters", "hoodies", "apparel", "mens"]', 'None', 'None');
+    VALUES ('bc2847e9-5323-403f-b7cf-57fde044a955', '/products/men-cozy-fleece-zip-up-hoodie-red.jpg', 'Men''s Full-Zip Hooded Fleece Sweatshirt', 4.5, 3157, 2400, '["sweaters", "hoodies", "apparel", "mens"]', 'None', 'None');
     
