@@ -3,19 +3,16 @@ package com.paul.amazon.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.paul.amazon.entity.User;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
 
-    Optional<User> findByUsernameOrEmail(String username, String email);
+    public Optional<User> findByUsernameOrEmail(String usernameOrEmail, String usernameOrEmail2);
 
-    Optional<User> findByUsername(String username);
+    // Methods to check if a username or email already exists
+    public boolean existsByUsername(String username);
 
-    Boolean existsByUsername(String username);
+    public boolean existsByEmail(String email);
 
-    Boolean existsByEmail(String email);
 }
