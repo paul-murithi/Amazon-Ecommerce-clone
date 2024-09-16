@@ -32,6 +32,11 @@ public class OrderService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
+    // New method to fetch orders for the authenticated user
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.findByUser(user);
+    }
+
     @Transactional
     public Order placeOrder(OrderRequestDTO orderRequest, User user) {
         Order order = new Order();
@@ -50,7 +55,7 @@ public class OrderService {
 
         List<OrderItem> orderItems = orderRequest.getItems().stream().map(itemDto -> {
             OrderItem orderItem = new OrderItem();
-            orderItem.setProductId(itemDto.getProductId());
+            orderItem.setProductExternalId(itemDto.getProductExternalId());
             orderItem.setName(itemDto.getName());
             orderItem.setQuantity(itemDto.getQuantity());
             orderItem.setPriceCents(itemDto.getPriceCents());

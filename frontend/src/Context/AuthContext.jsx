@@ -6,12 +6,12 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Updated login function to receive user data from the backend
+  // Updated login function
   const login = async (usernameOrEmail, password) => {
-    console.log("Assyn function hit");
     setLoading(true);
     setError(null);
 
@@ -32,16 +32,14 @@ export const AuthProvider = ({ children }) => {
         throw new Error(errorData || "Login failed");
       }
 
-      // since response contains a JWT token
+      // Get accessToken only from backend
       const { accessToken } = await response.json();
 
       // Save the JWT token in localStorage
       localStorage.setItem("jwtToken", accessToken);
 
-      // const userData = await response.json();
-      // localStorage.setItem("user", JSON.stringify(userData));
-
-      // setUser(userData);
+      // Set authentication status to true
+      setIsAuthenticated(true);
     } catch (err) {
       setError(err.message);
       throw err;
@@ -50,22 +48,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout function
+  // Updated logout function
   const logout = () => {
+    // Clear the token from localStorage
+    localStorage.removeItem("jwtToken");
+    setIsAuthenticated(false);
     setUser(null);
-    localStorage.removeItem("user");
   };
-
-  // Check if user is  authenticated on page load
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("user");
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser));
-  //   }
-  //   setLoading(false);
-  // }, []);
-
-  const isAuthenticated = !!user;
 
   return (
     <AuthContext.Provider

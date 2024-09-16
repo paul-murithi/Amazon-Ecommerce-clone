@@ -1,5 +1,7 @@
 package com.paul.amazon.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,10 +30,11 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
-    @Column(nullable = false)
-    private String productId;
+    @Column(name = "product_external_id", nullable = false)
+    private String productExternalId;
 
     @Column(nullable = false)
     private String name;
@@ -44,4 +47,8 @@ public class OrderItem {
 
     @Column(nullable = false)
     private String deliveryDate;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

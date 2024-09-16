@@ -6,7 +6,9 @@ import "./global.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CartProvider } from "./Context/CartProvider";
 import { OrderProvider } from "./Context/OrderContext";
+import { useAuth } from "./Context/AuthContext";
 import SignIn from "./pages/Auth/SignIn";
+import Logout from "./pages/Auth/Logout";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/auth/logout",
+    element: <Logout />,
   },
 ]);
 

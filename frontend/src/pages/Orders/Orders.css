@@ -23,11 +23,9 @@
 .order-header {
   background-color: rgb(240, 242, 242);
   border: 1px solid rgb(213, 217, 217);
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 20px 25px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -42,6 +40,11 @@
   font-weight: 500;
 }
 
+.order-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .order-date,
 .order-total {
   margin-right: 45px;
@@ -51,6 +54,7 @@
   flex-shrink: 1;
 }
 
+/* Responsive order header for small screens */
 @media (max-width: 575px) {
   .order-header {
     flex-direction: column;
@@ -80,6 +84,7 @@
   }
 }
 
+/* Order details grid */
 .order-details-grid {
   padding: 40px 25px;
   border: 1px solid rgb(213, 217, 217);
@@ -88,23 +93,31 @@
   border-bottom-right-radius: 8px;
 
   display: grid;
-  grid-template-columns: 110px 1fr 220px;
-  column-gap: 35px;
-  row-gap: 60px;
-  align-items: center;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(220px, 1fr)
+  ); /* Responsive columns */
+  gap: 35px;
+  align-items: start;
 }
 
+/* Handle cases with a single item - (Dynamic classname) */
+.order-details-grid.single-item {
+  justify-items: center;
+}
+
+/* Responsive styles for smaller screens */
 @media (max-width: 800px) {
   .order-details-grid {
-    grid-template-columns: 110px 1fr;
-    row-gap: 0;
-    padding-bottom: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    row-gap: 20px;
   }
 }
 
 @media (max-width: 450px) {
   .order-details-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -113,8 +126,9 @@
 }
 
 .product-image-container img {
-  max-width: 110px;
-  max-height: 110px;
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
 }
 
 .product-name {
@@ -130,12 +144,12 @@
   margin-bottom: 8px;
 }
 
+/* Buy again button styles */
 .buy-again-button {
   font-size: 15px;
   width: 140px;
   height: 36px;
   border-radius: 8px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,14 +162,18 @@
 
 .product-actions {
   align-self: start;
+  padding-top: 5%;
+  width: 140px;
 }
 
+/* Track package button */
 .track-package-button {
   width: 100%;
   font-size: 15px;
   padding: 8px;
 }
 
+/* Responsive buy again and track package for medium screens */
 @media (max-width: 800px) {
   .buy-again-button {
     margin-bottom: 10px;
@@ -171,6 +189,7 @@
   }
 }
 
+/* Adjustments for small screens */
 @media (max-width: 450px) {
   .product-image-container {
     text-align: center;

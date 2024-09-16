@@ -147,3 +147,65 @@
   width: 26px;
   text-align: center;
 }
+
+.account-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.user-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.sign-in-link {
+  color: #fff;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-text {
+  font-size: 14px;
+  color: white;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  text-align: left;
+  color: black;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.logout-btn:hover {
+  background-color: red;
+  color: white;
+}

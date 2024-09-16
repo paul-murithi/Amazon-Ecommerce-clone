@@ -1,44 +1,64 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CheckoutHeader from "../../components/checkout/CheckoutHeader";
 import { useCart } from "../../Context/CartProvider";
 import "./Orders.css";
+import { useAuth } from "../../Context/AuthContext";
 
 const Orders = () => {
-  const { cart } = useCart();
-  const { order } = useOrder();
+  const { user } = useAuth();
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!order) {
-      fetch("/api/orders")
-        .then((response) => response.json())
-        .then((data) => {
-          setOrder(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching orders:", error);
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/orders", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`, // Include JWT token in the request headers
+          },
         });
-    }
-  }, [order, setOrder]);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+
+        const data = await response.json();
+        setOrders(data);
+        console.log(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Failed to fetch orders: {error}</p>;
 
   return (
     <>
-      <CheckoutHeader cartLength={cart.length} />
+      <CheckoutHeader cartLength={0} />{" "}
+      {/* Adjust based on actual cart length */}
       <div className="orders-main">
         <div className="page-title">Your Orders</div>
 
         <div className="orders-grid">
-          {order?.map((order) => (
+          {orders.map((order) => (
             <div key={order.id} className="order-container">
               <div className="order-header">
                 <div className="order-header-left-section">
                   <div className="order-date">
                     <div className="order-header-label">Order Placed:</div>
-                    <div>{order.datePlaced}</div>
+                    <div>{new Date(order.orderDate).toLocaleDateString()}</div>
                   </div>
                   <div className="order-total">
                     <div className="order-header-label">Total:</div>
-                    <div>${order.total}</div>
+                    <div>${order.totalCost}</div>
                   </div>
                 </div>
 
@@ -48,9 +68,13 @@ const Orders = () => {
                 </div>
               </div>
 
-              <div className="order-details-grid">
-                {order.items.map((item) => (
-                  <div key={item.productId}>
+              <div
+                className={`order-details-grid ${
+                  order.items.length === 1 ? "single-item" : ""
+                }`}
+              >
+                {order.items.map((item, index) => (
+                  <div key={index} className="order-item">
                     <div className="product-image-container">
                       <img src={item.image} alt={item.name} />
                     </div>
@@ -58,7 +82,8 @@ const Orders = () => {
                     <div className="product-details">
                       <div className="product-name">{item.name}</div>
                       <div className="product-delivery-date">
-                        Arriving on: {calculateDeliveryDate(item.productId)}
+                        Arriving on:{" "}
+                        {new Date(item.deliveryDate).toLocaleDateString()}
                       </div>
                       <div className="product-quantity">
                         Quantity: {item.quantity}

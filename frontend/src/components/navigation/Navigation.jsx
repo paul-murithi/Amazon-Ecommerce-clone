@@ -1,13 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
+import { useAuth } from "../../Context/AuthContext"; // Import AuthContext
+import { useState } from "react";
 
 const Navigation = ({ cartQuantity }) => {
+  const { isAuthenticated, user, logout } = useAuth();
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // State for mobile menu
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <nav className="amazon-header">
       <div className="amazon-header-left-section">
         <Link className="header-link" to="/">
-          <img className="amazon-logo" src="/amazon-logo-white.png" />
+          <img
+            className="amazon-logo"
+            src="/amazon-logo-white.png"
+            alt="amazon-logo"
+          />
           <img
             className="amazon-mobile-logo"
             src="/amazon-mobile-logo-white.png"
@@ -18,7 +36,6 @@ const Navigation = ({ cartQuantity }) => {
 
       <div className="amazon-header-middle-section">
         <input className="search-bar" type="text" placeholder="Search" />
-
         <button className="search-button" aria-label="Search">
           <img
             className="search-icon"
@@ -29,11 +46,47 @@ const Navigation = ({ cartQuantity }) => {
         </button>
       </div>
 
-      <div className="amazon-header-right-section">
+      <div
+        className={`amazon-header-right-section ${
+          isMobileMenuOpen ? "open" : ""
+        }`}
+      >
         <Link to="/orders" className="orders-link header-link">
           <span className="returns-text">Returns</span>
           <span className="orders-text">& Orders</span>
         </Link>
+
+        <div
+          className="account-section"
+          onMouseEnter={() => setDropdownVisible(true)}
+          onMouseLeave={() => setDropdownVisible(false)}
+          onClick={() => setDropdownVisible((prev) => !prev)}
+        >
+          <img className="user-icon" src="/user-regular.svg" alt="user-icon" />
+          <div className="account-info">
+            {isAuthenticated ? (
+              <>
+                <span className="welcome-text">
+                  Hello, {user?.name || "User"}
+                </span>
+                {isDropdownVisible && (
+                  <div className="dropdown-menu">
+                    <Link to="/orders">Your Orders</Link>
+                    <button onClick={handleLogout} className="logout-btn">
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <span className="login-prompt">
+                <Link to="/auth/signin" className="sign-in-link">
+                  Sign In
+                </Link>
+              </span>
+            )}
+          </div>
+        </div>
 
         <Link to="/checkout" className="cart-link header-link">
           <img
@@ -46,6 +99,11 @@ const Navigation = ({ cartQuantity }) => {
           <div className="cart-text">Cart</div>
         </Link>
       </div>
+
+      {/* Hamburger Menu Icon for Mobile */}
+      <button className="hamburger-menu" onClick={toggleMobileMenu}>
+        ☰
+      </button>
     </nav>
   );
 };
