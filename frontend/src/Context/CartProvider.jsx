@@ -12,6 +12,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     const matchingItem = cart.find((item) => item.productId === product.id);
+    console.log("Product details:", product);
 
     if (matchingItem) {
       setCart((prevCart) =>
@@ -25,6 +26,7 @@ export const CartProvider = ({ children }) => {
       setCart((prevCart) => [
         ...prevCart,
         {
+          productExternalId: product.productId,
           productId: product.id,
           name: product.name,
           image: product.image,
