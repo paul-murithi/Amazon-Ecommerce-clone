@@ -38,6 +38,13 @@ export const CartProvider = ({ children }) => {
     setTimeout(() => setVisibleAddedToCart(null), 2500);
   };
 
+  // Function to remove item from cart
+  const removeFromCart = (productId) => {
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.productId !== productId)
+    );
+  };
+
   // Save cart to localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -49,6 +56,7 @@ export const CartProvider = ({ children }) => {
         cart,
         visibleAddedToCart,
         addToCart,
+        removeFromCart, // Provide removeFromCart function
         cartQuantity: cart.reduce((acc, item) => acc + item.quantity, 0),
       }}
     >

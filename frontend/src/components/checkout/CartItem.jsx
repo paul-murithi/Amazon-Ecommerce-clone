@@ -1,7 +1,12 @@
 import DeliveryOptions from "./DeliveryOptions";
 import styles from "./CartItem.module.css";
 
-const CartItem = ({ item, getDeliveryDate, handleDeliveryOptionChange }) => (
+const CartItem = ({
+  item,
+  getDeliveryDate,
+  handleDeliveryOptionChange,
+  removeFromCart,
+}) => (
   <div className={styles.cartItemContainer}>
     <div className={styles.deliveryDate}>
       Delivery date: {getDeliveryDate(item.productId)}
@@ -17,12 +22,17 @@ const CartItem = ({ item, getDeliveryDate, handleDeliveryOptionChange }) => (
         <div className={styles.productQuantity}>
           <span>
             Quantity:{" "}
-            <span className={styles.quantityLabel}>{item.quantity}</span>
+            <span
+              className={styles.quantityLabel}
+            >{`(${item.quantity}) : `}</span>
           </span>
-          <span className={`${styles.updateQuantityLink} link-primary`}>
+          {/* <span className={`${styles.updateQuantityLink} link-primary`}>
             Update
-          </span>
-          <span className={`${styles.deleteQuantityLink} link-primary`}>
+          </span> */}
+          <span
+            className={`${styles.deleteQuantityLink} link-primary`}
+            onClick={() => removeFromCart(item.productId)}
+          >
             Delete
           </span>
         </div>

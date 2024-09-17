@@ -13,7 +13,7 @@ import { useOrder } from "../../Context/OrderContext";
 import { useAuth } from "../../Context/AuthContext";
 
 const Checkout = () => {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart(); // Access removeFromCart from context
   const { placeOrder } = useOrder();
   const [deliveryOptions, setDeliveryOptions] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -108,6 +108,7 @@ const Checkout = () => {
                   item={item}
                   getDeliveryDate={getDeliveryDate}
                   handleDeliveryOptionChange={handleDeliveryOptionChange}
+                  removeFromCart={removeFromCart}
                 />
               ))}
             </div>

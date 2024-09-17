@@ -15,14 +15,26 @@
   height: 60px;
 }
 
-.amazon-header-left-section {
-  width: 180px;
-}
-
 @media (max-width: 800px) {
   .amazon-header-left-section {
     width: unset;
   }
+}
+
+.hamburger-menu {
+  width: 32px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+  display: none;
+}
+
+.hamburger-menu .bar {
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
 }
 
 .header-link {
@@ -97,7 +109,7 @@
 }
 
 .amazon-header-right-section {
-  width: 180px;
+  /* width: 180px; */
   flex-shrink: 0;
   display: flex;
   justify-content: end;
@@ -166,11 +178,6 @@
   color: #fff;
 }
 
-.account-info {
-  display: flex;
-  flex-direction: column;
-}
-
 .welcome-text {
   font-size: 14px;
   color: white;
@@ -208,4 +215,40 @@
 .logout-btn:hover {
   background-color: red;
   color: white;
+}
+
+@media (max-width: 500px) {
+  .orders-link {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .account-section {
+    display: none;
+  }
+  .hamburger-menu {
+    display: flex;
+    margin-left: 0.5rem;
+  }
+  .amazon-header-right-section.open {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgb(19, 25, 33);
+    width: 100%;
+    padding: 20px;
+    border-top: 1px solid white;
+    justify-content: space-evenly;
+    transition: ease-in 250ms;
+
+    & .account-section {
+      display: flex;
+    }
+
+    & .orders-link {
+      display: block;
+    }
+  }
 }

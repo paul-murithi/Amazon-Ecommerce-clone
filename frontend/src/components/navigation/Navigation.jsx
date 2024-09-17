@@ -101,9 +101,11 @@ const Navigation = ({ cartQuantity }) => {
       </div>
 
       {/* Hamburger Menu Icon for Mobile */}
-      <button className="hamburger-menu" onClick={toggleMobileMenu}>
-        ☰
-      </button>
+      <div className="hamburger-menu" onClick={toggleMobileMenu}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </div>
     </nav>
   );
 };
