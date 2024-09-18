@@ -42,6 +42,7 @@ public class SpringSecurityConfig {
                     authorize.requestMatchers("/api/auth/**").permitAll();
                     authorize.requestMatchers(HttpMethod.GET, "/api/products").permitAll();
                     authorize.requestMatchers(HttpMethod.GET, "/api/products/**").permitAll();
+                    authorize.requestMatchers(HttpMethod.GET, "/api/tracking/**").permitAll();
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorize.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());

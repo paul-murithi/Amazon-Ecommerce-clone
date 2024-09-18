@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     // Clear the token from localStorage
     localStorage.removeItem("jwtToken");
     setIsAuthenticated(false);
-    setUser(null);
+    // setUser(null);
   };
 
   return (

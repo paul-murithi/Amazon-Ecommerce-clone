@@ -35,7 +35,15 @@ const Orders = () => {
             const itemsWithImages = await Promise.all(
               order.items.map(async (item) => {
                 const productResponse = await fetch(
-                  `http://localhost:8080/api/products/${item.productExternalId}`
+                  `http://localhost:8080/api/products/${item.productExternalId}`,
+                  {
+                    method: "GET",
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem(
+                        "jwtToken"
+                      )}`,
+                    },
+                  }
                 );
                 const productData = await productResponse.json();
                 return {
@@ -52,7 +60,7 @@ const Orders = () => {
         );
 
         setOrders(ordersWithImages);
-        console.log(ordersWithImages);
+        console.log(orders);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -132,7 +140,7 @@ const Orders = () => {
 
                     <div className="product-actions">
                       <Link
-                        to={"/tracking"}
+                        to={`/tracking/${order.id}`}
                         className="track-package-button button-secondary"
                       >
                         Track package

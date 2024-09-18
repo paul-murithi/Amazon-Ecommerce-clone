@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
 import { useAuth } from "../../Context/AuthContext"; // Import AuthContext
@@ -9,13 +10,18 @@ const Navigation = ({ cartQuantity }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // State for mobile menu
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     logout();
+    navigate("/auth/logout");
   };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  console.log("Is authenticated:", isAuthenticated);
 
   return (
     <nav className="amazon-header">

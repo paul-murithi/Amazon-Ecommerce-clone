@@ -9,6 +9,7 @@ import { OrderProvider } from "./Context/OrderContext";
 import { useAuth } from "./Context/AuthContext";
 import SignIn from "./pages/Auth/SignIn";
 import Logout from "./pages/Auth/Logout";
+import Tracking from "./pages/Tracking/Tracking";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/logout",
     element: <Logout />,
+  },
+  {
+    path: "/tracking/:orderId",
+    element: <Tracking />,
   },
 ]);
 
