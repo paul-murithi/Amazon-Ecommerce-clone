@@ -4,7 +4,7 @@ import "./CardGrid.css";
 
 const CardGrid = ({ addToCart, data, visibleAddedToCart }) => {
   return data.map((product) => (
-    <div className="product-container" key={product.id}>
+    <div className="product-container" key={product.productId}>
       <div className="product-image-container">
         <img className="product-image" src={product.image} loading="lazy" />
       </div>

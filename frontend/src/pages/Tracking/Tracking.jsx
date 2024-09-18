@@ -44,33 +44,35 @@ const Tracking = () => {
 
   return (
     <>
-      <div class="main tracking">
-        <div class="order-tracking">
+      <div className="main tracking">
+        <div className="order-tracking">
           <Link to={"/orders"} className="back-to-orders-link link-primary">
             View all orders
           </Link>
 
-          <div class="delivery-date">Arriving on Wednesday, September 25</div>
+          <div className="delivery-date">
+            Arriving on Wednesday, September 25
+          </div>
 
-          <div class="product-info">
+          <div className="product-info">
             Black and Gray Athletic Cotton Socks - 6 Pairs
           </div>
 
-          <div class="product-info">Quantity: 1</div>
+          <div className="product-info">Quantity: 1</div>
 
           <img
-            class="product-image"
+            className="product-image"
             src="/products/athletic-cotton-socks-6-pairs.jpg"
           />
 
-          <div class="progress-labels-container">
-            <div class="progress-label">Preparing</div>
-            <div class="progress-label current-status">Shipped</div>
-            <div class="progress-label">Delivered</div>
+          <div className="progress-labels-container">
+            <div className="progress-label">Preparing</div>
+            <div className="progress-label current-status">Shipped</div>
+            <div className="progress-label">Delivered</div>
           </div>
 
-          <div class="progress-bar-container">
-            <div class="progress-bar"></div>
+          <div className="progress-bar-container">
+            <div className="progress-bar"></div>
           </div>
         </div>
       </div>

@@ -7,6 +7,30 @@ import { useCart } from "../../Context/CartProvider";
 const Home = () => {
   const [products, setProducts] = useState([]);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearch = async (query) => {
+    try {
+      const response = await fetch(`/api/products/search?query=${query}`);
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    handleSearch(searchQuery);
+  }, [searchQuery]);
+
+  const handleSearchSubmit = () => {
+    handleSearch(searchQuery);
+  };
+
   useEffect(() => {
     fetch("http://localhost:8080/api/products")
       .then((response) => response.json())
@@ -24,7 +48,12 @@ const Home = () => {
 
   return (
     <>
-      <Navigation cartQuantity={cartQuantity} />
+      <Navigation
+        cartQuantity={cartQuantity}
+        onSearchChange={handleSearchChange}
+        onSearchSubmit={handleSearchSubmit}
+        searchQuery={searchQuery}
+      />
       <div className="main">
         <div className="products-grid">
           <CardGrid

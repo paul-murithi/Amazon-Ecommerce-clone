@@ -36,6 +36,11 @@ public class ProductController {
         return ResponseEntity.ok(productDto);
     }
 
+    @GetMapping("/search")
+    public List<ProductDto> searchProducts(@RequestParam(required = false) String query) {
+        return productService.searchProducts(query);
+    }
+
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
         return productService.saveProduct(product);

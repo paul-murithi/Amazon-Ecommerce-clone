@@ -4,8 +4,15 @@ import { Link } from "react-router-dom";
 import "./Navigation.css";
 import { useAuth } from "../../Context/AuthContext"; // Import AuthContext
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
-const Navigation = ({ cartQuantity }) => {
+const Navigation = ({
+  cartQuantity,
+  searchQuery,
+  onSearchChange,
+  onSearchSubmit,
+}) => {
   const { isAuthenticated, user, logout } = useAuth();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // State for mobile menu
@@ -20,8 +27,6 @@ const Navigation = ({ cartQuantity }) => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
-
-  console.log("Is authenticated:", isAuthenticated);
 
   return (
     <nav className="amazon-header">
@@ -41,8 +46,18 @@ const Navigation = ({ cartQuantity }) => {
       </div>
 
       <div className="amazon-header-middle-section">
-        <input className="search-bar" type="text" placeholder="Search" />
-        <button className="search-button" aria-label="Search">
+        <input
+          className="search-bar"
+          type="search"
+          placeholder="Search products"
+          value={searchQuery}
+          onChange={onSearchChange}
+        />
+        <button
+          className="search-button"
+          aria-label="Search"
+          onClick={onSearchSubmit}
+        >
           <img
             className="search-icon"
             src="/icons/search-icon.png"
