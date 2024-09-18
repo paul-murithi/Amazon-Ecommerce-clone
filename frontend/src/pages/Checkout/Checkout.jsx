@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import CheckoutHeader from "../../components/checkout/CheckoutHeader";
+import SuccessModal from "../modal/SuccessModal";
 import EmptyCartMessage from "../../components/checkout/EmptyCartMessage";
 import CartItem from "../../components/checkout/CartItem";
 import ErrorModal from "../modal/ErrorModal";
@@ -13,13 +14,14 @@ import { useOrder } from "../../Context/OrderContext";
 import { useAuth } from "../../Context/AuthContext";
 
 const Checkout = () => {
-  const { cart, removeFromCart } = useCart(); // Access removeFromCart from context
+  const { cart, removeFromCart } = useCart();
   const { placeOrder } = useOrder();
   const [deliveryOptions, setDeliveryOptions] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const { user, logout, isAuthenticated } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [isNotLoggedIn, setIsNotLoggedIn] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
@@ -85,6 +87,7 @@ const Checkout = () => {
     try {
       const savedOrder = await placeOrder(orderDetails);
       console.log("Order placed successfully:", savedOrder);
+      setShowSuccessModal(true);
     } catch (error) {
       console.error("Failed to place order:", error);
       setErrorMessage("Failed to place the order. Please try again");
@@ -121,6 +124,11 @@ const Checkout = () => {
                 notLoggedIn={isNotLoggedIn}
               />
             )}
+            <>
+              {showSuccessModal && (
+                <SuccessModal onClose={() => setShowSuccessModal(false)} />
+              )}
+            </>
           </div>
         )}
       </div>

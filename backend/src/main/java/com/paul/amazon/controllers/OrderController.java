@@ -30,46 +30,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+        @Autowired
+        private OrderService orderService;
 
-    // Existing place order API
-    @PostMapping
-    public ResponseEntity<Order> placeOrder(
-            @RequestBody OrderRequestDTO orderRequestDTO,
-            @AuthenticationPrincipal CustomUserDetails userDetails) {
+        // Existing place order API
+        @PostMapping
+        public ResponseEntity<Order> placeOrder(
+                        @RequestBody OrderRequestDTO orderRequestDTO,
+                        @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        User user = userDetails.getUser();
-        Order order = orderService.placeOrder(orderRequestDTO, user);
+                User user = userDetails.getUser();
+                Order order = orderService.placeOrder(orderRequestDTO, user);
 
-        return new ResponseEntity<>(order, HttpStatus.CREATED);
-    }
+                return new ResponseEntity<>(order, HttpStatus.CREATED);
+        }
 
-    // New API to get user's orders
-    @GetMapping
-    public ResponseEntity<List<OrderDTO>> getUserOrders(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        User user = userDetails.getUser();
-        List<Order> orders = orderService.getOrdersByUser(user);
+        // New API to get user's orders
+        @GetMapping
+        public ResponseEntity<List<OrderDTO>> getUserOrders(@AuthenticationPrincipal CustomUserDetails userDetails) {
+                User user = userDetails.getUser();
+                List<Order> orders = orderService.getOrdersByUser(user);
 
-        // Convert to DTOs
-        List<OrderDTO> orderDTOs = orders.stream()
-                .map(order -> new OrderDTO(order.getId(), order.getOrderDate(), order.getTotalCost(),
-                        convertToOrderItemDTOs(order.getItems())))
-                .collect(Collectors.toList());
+                // Convert to DTOs
+                List<OrderDTO> orderDTOs = orders.stream()
+                                .map(order -> new OrderDTO(order.getId(), order.getOrderDate(), order.getTotalCost(),
+                                                convertToOrderItemDTOs(order.getItems())))
+                                .collect(Collectors.toList());
 
-        return new ResponseEntity<>(orderDTOs, HttpStatus.OK);
-    }
+                return new ResponseEntity<>(orderDTOs, HttpStatus.OK);
+        }
 
-    private List<OrderItemDTO> convertToOrderItemDTOs(List<OrderItem> items) {
-        return items.stream()
-                .map(item -> new OrderItemDTO(
-                        item.getProductExternalId(),
-                        item.getName(),
-                        item.getQuantity(),
-                        item.getPriceCents(),
-                        item.getDeliveryDate(),
-                        item.getProduct().getImage()))
-                .collect(Collectors.toList());
-    }
+        private List<OrderItemDTO> convertToOrderItemDTOs(List<OrderItem> items) {
+                return items.stream()
+                                .map(item -> new OrderItemDTO(
+                                                item.getProductExternalId(),
+                                                item.getName(),
+                                                item.getQuantity(),
+                                                item.getPriceCents(),
+                                                item.getDeliveryDate(),
+                                                item.getProduct() != null ? item.getProduct().getImage() : null))
+                                .collect(Collectors.toList());
+        }
 
 }

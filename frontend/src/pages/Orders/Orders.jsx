@@ -3,6 +3,7 @@ import CheckoutHeader from "../../components/checkout/CheckoutHeader";
 import { useCart } from "../../Context/CartProvider";
 import "./Orders.css";
 import { useAuth } from "../../Context/AuthContext";
+import Navigation from "../../components/navigation/Navigation";
 
 const Orders = () => {
   const { user } = useAuth();
@@ -10,13 +11,15 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { cartQuantity } = useCart();
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/orders", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`, // Include JWT token in the request headers
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
           },
         });
 
@@ -25,8 +28,30 @@ const Orders = () => {
         }
 
         const data = await response.json();
-        setOrders(data);
-        console.log(data);
+
+        const ordersWithImages = await Promise.all(
+          data.map(async (order) => {
+            const itemsWithImages = await Promise.all(
+              order.items.map(async (item) => {
+                const productResponse = await fetch(
+                  `http://localhost:8080/api/products/${item.productExternalId}`
+                );
+                const productData = await productResponse.json();
+                return {
+                  ...item,
+                  image: productData.image,
+                };
+              })
+            );
+            return {
+              ...order,
+              items: itemsWithImages,
+            };
+          })
+        );
+
+        setOrders(ordersWithImages);
+        console.log(ordersWithImages);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -42,8 +67,7 @@ const Orders = () => {
 
   return (
     <>
-      <CheckoutHeader cartLength={0} />{" "}
-      {/* Adjust based on actual cart length */}
+      <Navigation cartQuantity={cartQuantity} />
       <div className="orders-main">
         <div className="page-title">Your Orders</div>
 
@@ -76,7 +100,14 @@ const Orders = () => {
                 {order.items.map((item, index) => (
                   <div key={index} className="order-item">
                     <div className="product-image-container">
-                      <img src={item.image} alt={item.name} />
+                      <img
+                        src={
+                          item.image === null
+                            ? "/icons/image-regular.svg"
+                            : item.image
+                        }
+                        alt={item.name}
+                      />
                     </div>
 
                     <div className="product-details">

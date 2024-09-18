@@ -10,7 +10,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/products")
+    fetch("http://localhost:8080/api/products")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
