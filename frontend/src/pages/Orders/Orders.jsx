@@ -4,6 +4,7 @@ import { useCart } from "../../Context/CartProvider";
 import "./Orders.css";
 import { useAuth } from "../../Context/AuthContext";
 import Navigation from "../../components/navigation/Navigation";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
   const { user } = useAuth();
@@ -130,11 +131,12 @@ const Orders = () => {
                     </div>
 
                     <div className="product-actions">
-                      <a href="tracking.html">
-                        <button className="track-package-button button-secondary">
-                          Track package
-                        </button>
-                      </a>
+                      <Link
+                        to={"/tracking"}
+                        className="track-package-button button-secondary"
+                      >
+                        Track package
+                      </Link>
                     </div>
                   </div>
                 ))}

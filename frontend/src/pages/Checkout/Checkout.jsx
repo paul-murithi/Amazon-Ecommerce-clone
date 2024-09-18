@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useState } from "react";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import CheckoutHeader from "../../components/checkout/CheckoutHeader";

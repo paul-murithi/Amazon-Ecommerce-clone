@@ -1,9 +1,7 @@
-import React, { createContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Navigation from "../../components/navigation/Navigation";
 import CardGrid from "../../components/HomeItemsGrid/CardGrid";
-import Checkout from "../Checkout/Checkout";
-import data from "../../data/products";
 import { useCart } from "../../Context/CartProvider";
 
 const Home = () => {
